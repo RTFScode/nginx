@@ -44,7 +44,7 @@
 #define ngx_slab_slots(pool)                                                  \
     (ngx_slab_page_t *) ((u_char *) (pool) + sizeof(ngx_slab_pool_t))
 
-//获取page的低两位不存的类型
+//获取page的低两位存的类型
 #define ngx_slab_page_type(page)   ((page)->prev & NGX_SLAB_PAGE_MASK)
 
 #define ngx_slab_page_prev(page)                                              \
@@ -401,7 +401,7 @@ ngx_slab_alloc_locked(ngx_slab_pool_t *pool, size_t size)
         } 
 		/*
 		*	page的slab成员存储:
-		*	shift(低4位)，bitmap(高16位)
+		*	bitmap(高位)，低16位表示其他的信息
 		*/	
 		else { /* shift > ngx_slab_exact_shift */
 
