@@ -105,11 +105,21 @@ typedef struct {
 #define NGX_FILE_DEFAULT_ACCESS  0644
 #define NGX_FILE_OWNER_ACCESS    0600
 
-
+/*
+*	close(int fd)
+*	当使用完文件后若已不再需要则可使用close()关闭该文件, 
+*	close()会让数据写回磁盘, 并释放该文件所占用的资源. 
+*	参数fd 为先前由open()或creat()所返回的文件描述词.
+*/
 #define ngx_close_file           close
 #define ngx_close_file_n         "close()"
 
-
+/*
+*	unlink(const char* pathname)会删除参数pathname指定的文件. 
+*	如果该文件名为最后连接点, 但有其他进程打开了此文件, 
+*	则在所有关于此文件的文件描述词皆关闭后才会删除. 
+*	如果参数pathname 为一符号连接, 则此连接会被删除
+*/
 #define ngx_delete_file(name)    unlink((const char *) name)
 #define ngx_delete_file_n        "unlink()"
 
